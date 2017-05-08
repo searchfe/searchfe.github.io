@@ -33,5 +33,10 @@
 </head>
 <body>
     <div class="text">Hello PWA!</div>
+    <script>
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.register('./sw.js');
+        }
+    </script>
 </body>
 </html>
