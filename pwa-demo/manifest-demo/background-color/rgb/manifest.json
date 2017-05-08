@@ -25,5 +25,5 @@
     ],
     "start_url": "./index.html",
     "background_color": "rgb(0, 0, 255)",
-    "display": "minimal-ui"
+    "display": "standalone"
 }
