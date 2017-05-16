@@ -58,7 +58,7 @@
                     let usr = document.getElementById('usr');
                     let pwd = document.getElementById('pwd');
 
-                    switch (cred) {
+                    switch (cred.type) {
                         case 'password':
                             usr.value = cred.id;
                             pwd.value = cred.password;
