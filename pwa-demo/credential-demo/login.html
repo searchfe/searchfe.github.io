@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no,minimal-ui">
+    <link rel="shortcut icon" href="https://www.baidu.com/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <form id="form">
+        <input name="usr" type="text" autocomplete="username">
+        <input name="pwd" type="password" autocomplete="password">
+        <input type="submit" value="登录">
+    </form>
+    <script>
+        let form = document.getElementById('form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            fetch('./login.json', {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                console.log(data);
+            });
+        });
+    </script>
+</body>
+</html>
