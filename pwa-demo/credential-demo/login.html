@@ -18,10 +18,7 @@
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            fetch('./login.json', {
-                method: 'GET',
-                body: new FormData(form)
-            })
+            fetch('./login.json')
             .then(res => {
                 return res.json();
             })
