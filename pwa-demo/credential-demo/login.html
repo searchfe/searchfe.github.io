@@ -34,7 +34,7 @@
                         id: formData.get('usr'),
                         password: formData.get('pwd'),
                         name: data.name,
-                        iconURL: data.url
+                        iconURL: data.icon
                     });
                     return navigator.credentials.store(cred)
                         .then(() => {
