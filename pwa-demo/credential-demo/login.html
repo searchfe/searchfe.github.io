@@ -19,7 +19,7 @@
             e.preventDefault();
 
             fetch('./login.json', {
-                method: 'POST',
+                method: 'GET',
                 body: new FormData(form)
             })
             .then(res => {
