@@ -2,23 +2,93 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>login</title>
+    <title>登录</title>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no,minimal-ui">
     <link rel="shortcut icon" href="https://www.baidu.com/favicon.ico" type="image/x-icon">
+    <style>
+        body, html {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background: #2196f3;
+        }
+
+        .form {
+            width: 250px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            line-height: 30px;
+            color: #fff;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        input {
+            width: 250px;
+            height: 30px;
+            padding: 0 5px;
+            border: none;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 150px;
+            height: 40px;
+            font-size: 18px;
+            background: #f44336;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+        }
+
+        button:active {
+            background: #ff1122;
+        }
+
+        #tips {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <form id="form">
-        <input name="usr" type="text" autocomplete="username" id="usr">
-        <input name="pwd" type="password" autocomplete="password" id="pwd">
-        <input type="submit" value="登录">
-    </form>
+    <div class="form">
+        <h3>登录网站</h3>
+        <p>
+            <label>用户名</label>
+            <input type="text" id="usr">
+        </p>
+        <p>
+            <label>密&ensp;&ensp;码</label>
+            <input type="password" id="pwd">
+        </p>
+        <button id="btn">登录</button>
+        <p id="tips">您当前浏览器不支持凭证管理 API</p>
+    </div>
     <script>
-        let form = document.getElementById('form');
+        let usr = document.getElementById('usr');
+        let pwd = document.getElementById('pwd');
+        let btn = document.getElementById('btn');
 
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
+        btn.addEventListener('click', () => {
             fetch('./login.json')
             .then(res => {
                 if (res.status === 200) {
@@ -29,10 +99,9 @@
             })
             .then(data => {
                 if (navigator.credentials) {
-                    let formData = new FormData(form);
                     let cred = new PasswordCredential({
-                        id: formData.get('usr'),
-                        password: formData.get('pwd'),
+                        id: usr.value,
+                        password: pwd.value,
                         name: data.name,
                         iconURL: data.icon
                     });
@@ -45,7 +114,7 @@
                 return Promise.resolve(data);
             })
             .then(data => {
-                window.location.href = './main.html';
+                window.location.href = './main.html?username=' + data.name;
             });
         });
 
@@ -55,8 +124,6 @@
             })
             .then(cred => {
                 if (cred) {
-                    let usr = document.getElementById('usr');
-                    let pwd = document.getElementById('pwd');
 
                     switch (cred.type) {
                         case 'password':
@@ -68,6 +135,10 @@
                     }
                 }
             });
+        }
+        else {
+            let $tips = document.getElementById('tips');
+            $tips.style.display = 'block';
         }
     </script>
 </body>
