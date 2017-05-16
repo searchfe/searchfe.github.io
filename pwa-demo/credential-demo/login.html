@@ -30,7 +30,7 @@
             .then(data => {
                 if (navigator.credentials) {
                     let formData = new FormData(form);
-                    let cred = new PasswordCredetial({
+                    let cred = new PasswordCredential({
                         id: formData.get('usr'),
                         password: formData.get('pwd'),
                         name: data.name,
