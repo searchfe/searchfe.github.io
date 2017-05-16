@@ -72,7 +72,10 @@
                 // 注销凭证
                 navigator.credentials.requireUserMediation()
                     .then(() => {
-                        window.location.href = './login.html';
+                        let match = window.location.search.match(/from=(.+?)($|&)/);
+                        let page = match ? match[1] : 'login';
+
+                        window.location.href = './' + page + '.html';
                     });
             });
         }

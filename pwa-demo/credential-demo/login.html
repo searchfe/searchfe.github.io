@@ -114,7 +114,7 @@
                 return Promise.resolve(data);
             })
             .then(data => {
-                window.location.href = './main.html?username=' + data.name;
+                window.location.href = './main.html?from=login&username=' + data.name;
             });
         });
 
