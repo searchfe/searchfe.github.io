@@ -222,7 +222,7 @@ self.addEventListener('fetch', function(event) {
     if (!shouldRespond &&
         navigateFallback &&
         (event.request.mode === 'navigate') &&
-        isPathWhitelisted(["^(?!.*\\.html$|\\/data\\/|\\/public\\/).*"], event.request.url)) {
+        isPathWhitelisted(["^(?!.*\\.html$|\\/data\\/).*"], event.request.url)) {
       url = new URL(navigateFallback, self.location).toString();
       shouldRespond = urlsToCacheKeys.has(url);
     }
@@ -276,6 +276,7 @@ self.addEventListener('fetch', function(event) {
 
 toolbox.router.get(/\/material-design-icon/, toolbox.networkFirst, {});
 toolbox.router.get(/\/fonts\//, toolbox.fastest, {"cache":{"maxEntries":10,"name":"fonts-cache"}});
+toolbox.router.get(/\/public\//, toolbox.networkFirst, {});
 
 
 
