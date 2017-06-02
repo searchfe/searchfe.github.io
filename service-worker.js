@@ -222,7 +222,7 @@ self.addEventListener('fetch', function(event) {
     if (!shouldRespond &&
         navigateFallback &&
         (event.request.mode === 'navigate') &&
-        isPathWhitelisted(["^(?!.*\\.html$|\\/data\\/).*"], event.request.url)) {
+        isPathWhitelisted(["^(?!.*\\.html$|\\/data\\/|\\/public\\/).*"], event.request.url)) {
       url = new URL(navigateFallback, self.location).toString();
       shouldRespond = urlsToCacheKeys.has(url);
     }
