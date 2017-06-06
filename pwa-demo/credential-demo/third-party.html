@@ -12,7 +12,7 @@
     <div class="form">
         <h3>第三方登录</h3>
         <p>
-            <button id="login-btn" data-provider="baidu.com">百度登录</button>
+            <button id="login-btn" data-provider="https://www.baidu.com">百度登录</button>
         </p>
     </div>
     <script>
@@ -35,7 +35,7 @@
                         id: data.uid,
                         provider: provider,
                         name: data.name,
-                        iconUrl: data.url
+                        iconUrl: data.icon
                     });
                     return navigator.credentials.store(cred)
                         .then(() => {
@@ -53,7 +53,7 @@
         if (navigator.credentials) {
             navigator.credentials.get({
                 federated: {
-                    providers: ['baidu.com']
+                    providers: ['https://www.baidu.com']
                 }
             })
             .then(cred => {
@@ -62,7 +62,7 @@
                         case 'federated':
                             // FederatedCredential 凭证处理
                             switch (cred.provider) {
-                                case 'baidu.com':
+                                case 'https://www.baidu.com':
                                     // 调起百度第三方登录
                                     window.location.href = './main.html?from=third-party&username=' + cred.name;
                             }
