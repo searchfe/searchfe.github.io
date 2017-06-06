@@ -52,6 +52,7 @@
 
         if (navigator.credentials) {
             navigator.credentials.get({
+                password: true,
                 federated: {
                     providers: ['https://www.baidu.com']
                 }
