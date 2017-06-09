@@ -12,101 +12,131 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
+ */
 
 'use strict';
 
-var precacheConfig = [["index.html","675e19986cce44501a4c5ef65bfd768d"],["static/css/app.d06bbad6ff4b1381adce0317d7d597e8.css","218dbaa3068dcfacd14619926c41e1a0"],["static/css/app.d06bbad6ff4b1381adce0317d7d597e8.css.map","54dc5fdb1d5cffb5bae63a0c73affb56"],["static/fonts/MaterialIcons-Regular.ttf","a37b0c01c0baf1888ca812cc0508f6e2"],["static/fonts/MaterialIcons-Regular.woff","012cf6a10129e2275d79d6adac7f3b02"],["static/fonts/MaterialIcons-Regular.woff2","40de091676f313252d80ea8fb83b9c1e"],["static/img/icons/android-chrome-192x192.png","f130a0b70e386170cf6f011c0ca8c4f4"],["static/img/icons/android-chrome-512x512.png","0ff1bc4d14e5c9abcacba7c600d97814"],["static/img/icons/apple-touch-icon-120x120.png","936d6e411cabd71f0e627011c3f18fe2"],["static/img/icons/apple-touch-icon-152x152.png","1a034e64d80905128113e5272a5ab95e"],["static/img/icons/apple-touch-icon-180x180.png","c43cd371a49ee4ca17ab3a60e72bdd51"],["static/img/icons/apple-touch-icon-60x60.png","9a2b5c0f19de617685b7b5b42464e7db"],["static/img/icons/apple-touch-icon-76x76.png","af28d69d59284dd202aa55e57227b11b"],["static/img/icons/apple-touch-icon.png","66830ea6be8e7e94fb55df9f7b778f2e"],["static/img/icons/favicon-16x16.png","4bb1a55479d61843b89a2fdafa7849b3"],["static/img/icons/favicon-32x32.png","98b614336d9a12cb3f7bedb001da6fca"],["static/img/icons/favicon.ico","7a2fa8fc2aff558ca7b7e6d5dddb5315"],["static/img/icons/mstile-150x150.png","058a3335d15a3eb84e7ae3707ba09620"],["static/img/icons/safari-pinned-tab.svg","f22d501a35a87d9f21701cb031f6ea17"],["static/js/0.666cf97f2034498e4bb5.js","3bf71448c2d0bc227583992e05366769"],["static/js/0.666cf97f2034498e4bb5.js.map","316ecd6a0b824937d729187fd0e1de3c"],["static/js/1.404a9cea0bd2ff083b4f.js","93df23da88749cd34db82a494aa54cdf"],["static/js/1.404a9cea0bd2ff083b4f.js.map","a265f4a84857f6f29cdcc75e0a36fefa"],["static/js/2.cfb71b9ca4becaf54dcb.js","9e227b582be9b441982ddb335e2c6d5a"],["static/js/2.cfb71b9ca4becaf54dcb.js.map","0e779d2fbdcb02c424c2372abac19473"],["static/js/3.492b866fb34b160916a4.js","9e1f6fa5d269c3e0cf68c128960f07ae"],["static/js/3.492b866fb34b160916a4.js.map","842d414cda4289f981d11f1860ddefa7"],["static/js/4.acbf53d8326053eac0c0.js","ecf4f8c32b1919a9395420a3d694f0c2"],["static/js/4.acbf53d8326053eac0c0.js.map","b6c6cfd946caab6f9d4a4fe71ca160e3"],["static/js/app.33ca8ceaaa5dfe67f7dd.js","5c9b11b3efaa26f11f214a6268cf7893"],["static/js/app.33ca8ceaaa5dfe67f7dd.js.map","f38b934c6e465614334a258964f81528"],["static/js/manifest.e1c0e8e272501626b0d8.js","8336a75424ffb63b3d53d7e17acc727c"],["static/js/manifest.e1c0e8e272501626b0d8.js.map","265a48c9316c2393b49a656e87c06eaf"],["static/js/sw-register.90050d5d9ebf18bdee25.js.map","aa28ca0f405d65f586e32d2ca02ec64c"],["static/js/vendor.28c1141201d70c441ade.js","29e1c5597c2805f7debb3cc48d3f3bc9"],["static/js/vendor.28c1141201d70c441ade.js.map","8e26f78e50e1b279f40968e34dbb456c"]];
+var precacheConfig = [["/favicon.ico","7a2fa8fc2aff558ca7b7e6d5dddb5315"],["/index.html","2681a5da57cc69218c5d0005a3e78c70"],["/static/css/app.36f2e0246bb51059168c287282bdd415.css","d93c55c93687ae68cc499c251676c6fd"],["/static/fonts/MaterialIcons-Regular.ttf","a37b0c01c0baf1888ca812cc0508f6e2"],["/static/fonts/MaterialIcons-Regular.woff","012cf6a10129e2275d79d6adac7f3b02"],["/static/fonts/MaterialIcons-Regular.woff2","40de091676f313252d80ea8fb83b9c1e"],["/static/img/icons/android-chrome-192x192.png","f130a0b70e386170cf6f011c0ca8c4f4"],["/static/img/icons/android-chrome-512x512.png","0ff1bc4d14e5c9abcacba7c600d97814"],["/static/img/icons/apple-touch-icon-120x120.png","936d6e411cabd71f0e627011c3f18fe2"],["/static/img/icons/apple-touch-icon-152x152.png","1a034e64d80905128113e5272a5ab95e"],["/static/img/icons/apple-touch-icon-180x180.png","c43cd371a49ee4ca17ab3a60e72bdd51"],["/static/img/icons/apple-touch-icon-60x60.png","9a2b5c0f19de617685b7b5b42464e7db"],["/static/img/icons/apple-touch-icon-76x76.png","af28d69d59284dd202aa55e57227b11b"],["/static/img/icons/apple-touch-icon.png","66830ea6be8e7e94fb55df9f7b778f2e"],["/static/img/icons/favicon-16x16.png","4bb1a55479d61843b89a2fdafa7849b3"],["/static/img/icons/favicon-32x32.png","98b614336d9a12cb3f7bedb001da6fca"],["/static/img/icons/favicon.ico","7a2fa8fc2aff558ca7b7e6d5dddb5315"],["/static/img/icons/mstile-150x150.png","058a3335d15a3eb84e7ae3707ba09620"],["/static/img/icons/safari-pinned-tab.svg","f22d501a35a87d9f21701cb031f6ea17"],["/static/js/0.00184348691c2e0b039f.js","78f1a57fd66611dec374362f21a59734"],["/static/js/1.ff68420ff4f046e91768.js","33e18d3f53247bce482e92be208c95a7"],["/static/js/2.e3c7d4e94b5ee820142c.js","88b13475cea6194ea0743cc78a471091"],["/static/js/3.1f961e0ef570411ca2eb.js","570c94c4bf24daee7ad55bf818755d16"],["/static/js/4.6e588782c193210c641c.js","6088428a991d8bae2562840107be48d5"],["/static/js/app.38a35b4b96cb2db470a2.js","e2777be3f2157e3675b911a3e7177ee3"],["/static/js/manifest.3afb0026771874b66b10.js","d2175d45becada9ba764aec878bc33b6"],["/static/js/vendor.071ba1194aa9e851d75d.js","3484ee9341e76ca4cb77595f8708bd66"],["/static/manifest.json","e396b63883ce52f1622d48cfefcbda3a"],["/sw-register.js","09ee567ddb0217eff31c706c5cbd7c17"]];
 var cacheName = 'sw-precache-v3-my-vue-app-' + (self.registration ? self.registration.scope : '');
+var firstRegister = 1;
 
 
 var ignoreUrlParametersMatching = [/^utm_/];
 
 
-
 var addDirectoryIndex = function (originalUrl, index) {
-    var url = new URL(originalUrl);
-    if (url.pathname.slice(-1) === '/') {
-      url.pathname += index;
-    }
-    return url.toString();
-  };
+  var url = new URL(originalUrl);
+  if (url.pathname.slice(-1) === '/') {
+    url.pathname += index;
+  }
+  return url.toString();
+};
 
 var cleanResponse = function (originalResponse) {
-    // If this is not a redirected response, then we don't have to do anything.
-    if (!originalResponse.redirected) {
-      return Promise.resolve(originalResponse);
-    }
+  // If this is not a redirected response, then we don't have to do anything.
+  if (!originalResponse.redirected) {
+    return Promise.resolve(originalResponse);
+  }
 
-    // Firefox 50 and below doesn't support the Response.body stream, so we may
-    // need to read the entire body to memory as a Blob.
-    var bodyPromise = 'body' in originalResponse ?
-      Promise.resolve(originalResponse.body) :
-      originalResponse.blob();
+  // Firefox 50 and below doesn't support the Response.body stream, so we may
+  // need to read the entire body to memory as a Blob.
+  var bodyPromise = 'body' in originalResponse ?
+    Promise.resolve(originalResponse.body) :
+    originalResponse.blob();
 
-    return bodyPromise.then(function(body) {
-      // new Response() is happy when passed either a stream or a Blob.
-      return new Response(body, {
-        headers: originalResponse.headers,
-        status: originalResponse.status,
-        statusText: originalResponse.statusText
-      });
+  return bodyPromise.then(function(body) {
+    // new Response() is happy when passed either a stream or a Blob.
+    return new Response(body, {
+      headers: originalResponse.headers,
+      status: originalResponse.status,
+      statusText: originalResponse.statusText
     });
-  };
+  });
+};
 
 var createCacheKey = function (originalUrl, paramName, paramValue,
-                           dontCacheBustUrlsMatching) {
-    // Create a new URL object to avoid modifying originalUrl.
-    var url = new URL(originalUrl);
+                         dontCacheBustUrlsMatching) {
+  // Create a new URL object to avoid modifying originalUrl.
+  var url = new URL(originalUrl);
 
-    // If dontCacheBustUrlsMatching is not set, or if we don't have a match,
-    // then add in the extra cache-busting URL parameter.
-    if (!dontCacheBustUrlsMatching ||
-        !(url.pathname.match(dontCacheBustUrlsMatching))) {
-      url.search += (url.search ? '&' : '') +
-        encodeURIComponent(paramName) + '=' + encodeURIComponent(paramValue);
-    }
+  // If dontCacheBustUrlsMatching is not set, or if we don't have a match,
+  // then add in the extra cache-busting URL parameter.
+  if (!dontCacheBustUrlsMatching ||
+      !(url.pathname.match(dontCacheBustUrlsMatching))) {
+    url.search += (url.search ? '&' : '') +
+      encodeURIComponent(paramName) + '=' + encodeURIComponent(paramValue);
+  }
 
-    return url.toString();
-  };
+  return url.toString();
+};
 
 var isPathWhitelisted = function (whitelist, absoluteUrlString) {
-    // If the whitelist is empty, then consider all URLs to be whitelisted.
-    if (whitelist.length === 0) {
-      return true;
-    }
+  // If the whitelist is empty, then consider all URLs to be whitelisted.
+  if (whitelist.length === 0) {
+    return true;
+  }
 
-    // Otherwise compare each path regex to the path of the URL passed in.
-    var path = (new URL(absoluteUrlString)).pathname;
-    return whitelist.some(function(whitelistedPathRegex) {
-      return path.match(whitelistedPathRegex);
-    });
-  };
+  // Otherwise compare each path regex to the path of the URL passed in.
+  var path = (new URL(absoluteUrlString)).pathname;
+  return whitelist.some(function(whitelistedPathRegex) {
+    return path.match(whitelistedPathRegex);
+  });
+};
 
 var stripIgnoredUrlParameters = function (originalUrl,
-    ignoreUrlParametersMatching) {
-    var url = new URL(originalUrl);
-    // Remove the hash; see https://github.com/GoogleChrome/sw-precache/issues/290
-    url.hash = '';
+  ignoreUrlParametersMatching) {
+  var url = new URL(originalUrl);
+  // Remove the hash; see https://github.com/GoogleChrome/sw-precache/issues/290
+  url.hash = '';
 
-    url.search = url.search.slice(1) // Exclude initial '?'
-      .split('&') // Split into an array of 'key=value' strings
-      .map(function(kv) {
-        return kv.split('='); // Split each 'key=value' string into a [key, value] array
-      })
-      .filter(function(kv) {
-        return ignoreUrlParametersMatching.every(function(ignoredRegex) {
-          return !ignoredRegex.test(kv[0]); // Return true iff the key doesn't match any of the regexes.
-        });
-      })
-      .map(function(kv) {
-        return kv.join('='); // Join each [key, value] array into a 'key=value' string
-      })
-      .join('&'); // Join the array of 'key=value' strings into a string with '&' in between each
+  url.search = url.search.slice(1) // Exclude initial '?'
+    .split('&') // Split into an array of 'key=value' strings
+    .map(function(kv) {
+      return kv.split('='); // Split each 'key=value' string into a [key, value] array
+    })
+    .filter(function(kv) {
+      return ignoreUrlParametersMatching.every(function(ignoredRegex) {
+        return !ignoredRegex.test(kv[0]); // Return true iff the key doesn't match any of the regexes.
+      });
+    })
+    .map(function(kv) {
+      return kv.join('='); // Join each [key, value] array into a 'key=value' string
+    })
+    .join('&'); // Join the array of 'key=value' strings into a string with '&' in between each
 
-    return url.toString();
-  };
+  return url.toString();
+};
 
+
+var addDirectoryIndex = function (originalUrl, index) {
+  var url = new URL(originalUrl);
+  if (url.pathname.slice(-1) === '/') {
+    url.pathname += index;
+  }
+  return url.toString();
+};
+
+var cleanResponse = function (originalResponse) {
+  // If this is not a redirected response, then we don't have to do anything.
+  if (!originalResponse.redirected) {
+    return Promise.resolve(originalResponse);
+  }
+
+  // Firefox 50 and below doesn't support the Response.body stream, so we may
+  // need to read the entire body to memory as a Blob.
+  var bodyPromise = 'body' in originalResponse ?
+    Promise.resolve(originalResponse.body) :
+    originalResponse.blob();
+
+  return bodyPromise.then(function(body) {
+    // new Response() is happy when passed either a stream or a Blob.
+    return new Response(body, {
+      headers: originalResponse.headers,
+      status: originalResponse.status,
+      statusText: originalResponse.statusText
+    });
+  });
+};
 
 var hashParamName = '_sw-precache';
 var urlsToCacheKeys = new Map(
@@ -121,6 +151,9 @@ var urlsToCacheKeys = new Map(
 
 function setOfCachedUrls(cache) {
   return cache.keys().then(function(requests) {
+    if (requests && requests.length > 0) {
+      firstRegister = 0;
+    }
     return requests.map(function(request) {
       return request.url;
     });
@@ -183,13 +216,15 @@ self.addEventListener('activate', function(event) {
       return self.clients.claim();
       
     }).then(function() {
+      if (!firstRegister) {
         return self.clients.matchAll()
           .then(function (clients) {
-              if (clients && clients.length) {
-                  var currentClient = clients[0];
-                  currentClient.postMessage('updateMessage');
-              }
+            if (clients && clients.length) {
+              var currentClient = clients[0];
+              currentClient.postMessage('updateMessage');
+            }
           })
+      }
     })
   );
 });
@@ -275,8 +310,7 @@ self.addEventListener('fetch', function(event) {
 // Runtime cache configuration, using the sw-toolbox library.
 
 toolbox.router.get(/\/material-design-icon/, toolbox.networkFirst, {});
-toolbox.router.get(/\/fonts\//, toolbox.fastest, {"cache":{"maxEntries":10,"name":"fonts-cache"}});
-toolbox.router.get(/\/public\//, toolbox.networkFirst, {});
+toolbox.router.get(/\/pwa\.baidu\.com/, toolbox.networkFirst, {});
 
 
 
