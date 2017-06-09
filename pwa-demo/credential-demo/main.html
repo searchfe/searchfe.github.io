@@ -71,17 +71,20 @@
             $btn.addEventListener('click', () => {
                 // 注销凭证
                 navigator.credentials.requireUserMediation()
-                    .then(() => {
-                        let match = window.location.search.match(/from=(.+?)($|&)/);
-                        let page = match ? match[1] : 'login';
-
-                        window.location.href = './' + page + '.html';
-                    });
+                    .then(afterLogout)
+                    .catch(afterLogout);
             });
         }
         else {
             let $tips = document.getElementById('tips');
             $tips.style.display = 'block';
+        }
+
+        function afterLogout() {
+            let match = window.location.search.match(/from=(.+?)($|&)/);
+            let page = match ? match[1] : 'login';
+
+            window.location.href = './' + page + '.html';
         }
     </script>
 </body>
