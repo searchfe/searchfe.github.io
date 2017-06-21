@@ -36,7 +36,7 @@ if ('serviceWorker' in navigator) {
     };
 
 
-    navigator.serviceWorker.register('/service-worker.js?v=20170621130909');
+    navigator.serviceWorker.register('/service-worker.js?v=20170621131740');
 
     navigator.serviceWorker.addEventListener('message', e => {
         // received the update message from sw
