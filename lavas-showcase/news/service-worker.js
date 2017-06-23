@@ -1,22 +1,14 @@
 /**
- * Copyright 2016 Google Inc. All rights reserved.
+ * 自动引入模板，在原有sw-precache 插件默认模板基础上做的二次开发
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * 1、使用者一般不用修改
+ * 2、因为是自定导入的模板，项目一旦生成，不支持随sw-precache 的版本自动升级。
+ * 3、可以到 Lavas 官网下载 basic 模板内获取最新模板进行手动替换
  */
 
 'use strict';
 
-var precacheConfig = [["/lavas-showcase/news/favicon.ico","93f4c0088ce14f27cff7e2d05e03f9a4"],["/lavas-showcase/news/index.html","400554794542ae3442326f8e8796fd68"],["/lavas-showcase/news/static/css/app.35d647b77dc8505bc350a9e1e7d3ed78.css","4871e009f9721d01992ea43504a4f5bb"],["/lavas-showcase/news/static/fonts/MaterialIcons-Regular.ttf","a37b0c01c0baf1888ca812cc0508f6e2"],["/lavas-showcase/news/static/fonts/MaterialIcons-Regular.woff","012cf6a10129e2275d79d6adac7f3b02"],["/lavas-showcase/news/static/fonts/MaterialIcons-Regular.woff2","40de091676f313252d80ea8fb83b9c1e"],["/lavas-showcase/news/static/img/icons/android-chrome-192x192.png","ae229ce33a6309f35f2540fc446e42d3"],["/lavas-showcase/news/static/img/icons/android-chrome-512x512.png","585f413f7bb6020a0d7f00ee5849f584"],["/lavas-showcase/news/static/img/icons/apple-touch-icon-120x120.png","6af4cd715f48063016ca338bbfbb7905"],["/lavas-showcase/news/static/img/icons/apple-touch-icon-152x152.png","bd716790b60207b17f0bb081d7963fe8"],["/lavas-showcase/news/static/img/icons/apple-touch-icon-180x180.png","334633df61e20eef87d19a6f53fef0ff"],["/lavas-showcase/news/static/img/icons/apple-touch-icon-60x60.png","116550309f22c070cda6776eb8598b48"],["/lavas-showcase/news/static/img/icons/apple-touch-icon-76x76.png","380640393624db78a6aca5ea100141cf"],["/lavas-showcase/news/static/img/icons/apple-touch-icon.png","b585a21f13d8c41c8c84c5e834113889"],["/lavas-showcase/news/static/img/icons/favicon-16x16.png","f0a39ed7b8178408ae706d030c1b7457"],["/lavas-showcase/news/static/img/icons/favicon-32x32.png","657745124d03529458ea7f6acb14d4eb"],["/lavas-showcase/news/static/img/icons/favicon.ico","93f4c0088ce14f27cff7e2d05e03f9a4"],["/lavas-showcase/news/static/img/icons/mstile-150x150.png","809fe6add7fe78e0b8be7b32151d8278"],["/lavas-showcase/news/static/img/icons/safari-pinned-tab.svg","f22d501a35a87d9f21701cb031f6ea17"],["/lavas-showcase/news/static/js/0.261fff733ce0f8784e8b.js","10c8825dd1dac89ce61ec72da1b7fc67"],["/lavas-showcase/news/static/js/1.430018089df1e468cbde.js","e8c9a7c4ab791e25bbc2882f7355b465"],["/lavas-showcase/news/static/js/2.393d13daa4fb17fa88c6.js","00896806d607393002fd9726a8b10c15"],["/lavas-showcase/news/static/js/3.6cd242595c11fc368c5e.js","ce912597eeb4f309878eb605bc922df0"],["/lavas-showcase/news/static/js/4.d05a95eb484c64d0011d.js","f33dd051f6165cbf04228fd66dd16339"],["/lavas-showcase/news/static/js/app.d80a1cab8e4a9b0765c7.js","934b0ff686e3689a0d723ba542331569"],["/lavas-showcase/news/static/js/manifest.f31cc8df16de75bb57a3.js","d45e35e3267427c965115e196ddacc5e"],["/lavas-showcase/news/static/js/vendor.93b99845cb5eaa3b3959.js","8999978e2eca6a7cb400efa1973a1f20"],["/lavas-showcase/news/static/manifest.json","ac821c57a34bb8e0f47d498dbddc830d"],["/lavas-showcase/news/sw-register.js","f1350664a36aefa4108164d204d9af63"]];
+var precacheConfig = [["/lavas-showcase/news/favicon.ico","93f4c0088ce14f27cff7e2d05e03f9a4"],["/lavas-showcase/news/index.html","3d6cadd852028d96a6c21ef52bbdc7ee"],["/lavas-showcase/news/static/css/app.35d647b77dc8505bc350a9e1e7d3ed78.css","4871e009f9721d01992ea43504a4f5bb"],["/lavas-showcase/news/static/fonts/MaterialIcons-Regular.ttf","a37b0c01c0baf1888ca812cc0508f6e2"],["/lavas-showcase/news/static/fonts/MaterialIcons-Regular.woff","012cf6a10129e2275d79d6adac7f3b02"],["/lavas-showcase/news/static/fonts/MaterialIcons-Regular.woff2","40de091676f313252d80ea8fb83b9c1e"],["/lavas-showcase/news/static/img/icons/android-chrome-192x192.png","ae229ce33a6309f35f2540fc446e42d3"],["/lavas-showcase/news/static/img/icons/android-chrome-512x512.png","585f413f7bb6020a0d7f00ee5849f584"],["/lavas-showcase/news/static/img/icons/apple-touch-icon-120x120.png","6af4cd715f48063016ca338bbfbb7905"],["/lavas-showcase/news/static/img/icons/apple-touch-icon-152x152.png","bd716790b60207b17f0bb081d7963fe8"],["/lavas-showcase/news/static/img/icons/apple-touch-icon-180x180.png","334633df61e20eef87d19a6f53fef0ff"],["/lavas-showcase/news/static/img/icons/apple-touch-icon-60x60.png","116550309f22c070cda6776eb8598b48"],["/lavas-showcase/news/static/img/icons/apple-touch-icon-76x76.png","380640393624db78a6aca5ea100141cf"],["/lavas-showcase/news/static/img/icons/apple-touch-icon.png","b585a21f13d8c41c8c84c5e834113889"],["/lavas-showcase/news/static/img/icons/favicon-16x16.png","f0a39ed7b8178408ae706d030c1b7457"],["/lavas-showcase/news/static/img/icons/favicon-32x32.png","657745124d03529458ea7f6acb14d4eb"],["/lavas-showcase/news/static/img/icons/favicon.ico","93f4c0088ce14f27cff7e2d05e03f9a4"],["/lavas-showcase/news/static/img/icons/mstile-150x150.png","809fe6add7fe78e0b8be7b32151d8278"],["/lavas-showcase/news/static/img/icons/safari-pinned-tab.svg","f22d501a35a87d9f21701cb031f6ea17"],["/lavas-showcase/news/static/js/0.8470ad32c814be209434.js","e574ce75dc38846bad424c6b5b904641"],["/lavas-showcase/news/static/js/1.62f94eb657462359eacf.js","4e237fa4177a35bd6d73faa8b78b7752"],["/lavas-showcase/news/static/js/2.2f5af9a01e7b9e1d885f.js","64f09879c6033ff6100487c9cf47efd0"],["/lavas-showcase/news/static/js/3.b3da3b83d3eca5995a3f.js","ee2e0dda921210ea5cfc6b1456252765"],["/lavas-showcase/news/static/js/4.e40be4fbfb7809b9578b.js","087369cfe28e1690f69aa22b07a4b3d8"],["/lavas-showcase/news/static/js/app.f36cae716f1d92e4bab1.js","e0d11f7412c29bc0f6b5e2047dc4a2dd"],["/lavas-showcase/news/static/js/manifest.9de46754dfe70dd49812.js","499d7e12a8dccd44369eb8d68ce94f46"],["/lavas-showcase/news/static/js/vendor.bba9b8526acb6d5dd061.js","fd9936f8df0ddc2af5140009753e11f6"],["/lavas-showcase/news/static/manifest.json","ac821c57a34bb8e0f47d498dbddc830d"],["/lavas-showcase/news/sw-register.js","ddbb8e30de7f4dc7529c2d603c256fe5"]];
 var cacheName = 'sw-precache-v3-my-vue-app-' + (self.registration ? self.registration.scope : '');
 var firstRegister = 1;
 
@@ -25,86 +17,88 @@ var ignoreUrlParametersMatching = [/^utm_/];
 
 
 var addDirectoryIndex = function (originalUrl, index) {
-  var url = new URL(originalUrl);
-  if (url.pathname.slice(-1) === '/') {
-    url.pathname += index;
-  }
-  return url.toString();
+    var url = new URL(originalUrl);
+    if (url.pathname.slice(-1) === '/') {
+        url.pathname += index;
+    }
+    return url.toString();
 };
 
 var cleanResponse = function (originalResponse) {
-  // If this is not a redirected response, then we don't have to do anything.
-  if (!originalResponse.redirected) {
-    return Promise.resolve(originalResponse);
-  }
+    // If this is not a redirected response, then we don't have to do anything.
+    if (!originalResponse.redirected) {
+      return Promise.resolve(originalResponse);
+    }
 
-  // Firefox 50 and below doesn't support the Response.body stream, so we may
-  // need to read the entire body to memory as a Blob.
-  var bodyPromise = 'body' in originalResponse ?
-    Promise.resolve(originalResponse.body) :
-    originalResponse.blob();
+    // Firefox 50 and below doesn't support the Response.body stream, so we may
+    // need to read the entire body to memory as a Blob.
+    var bodyPromise = 'body' in originalResponse ?
+        Promise.resolve(originalResponse.body) :
+        originalResponse.blob();
 
-  return bodyPromise.then(function(body) {
-    // new Response() is happy when passed either a stream or a Blob.
-    return new Response(body, {
-      headers: originalResponse.headers,
-      status: originalResponse.status,
-      statusText: originalResponse.statusText
+    return bodyPromise.then(function(body) {
+        // new Response() is happy when passed either a stream or a Blob.
+        return new Response(body, {
+            headers: originalResponse.headers,
+            status: originalResponse.status,
+            statusText: originalResponse.statusText
+        });
     });
-  });
 };
 
 var createCacheKey = function (originalUrl, paramName, paramValue,
-                         dontCacheBustUrlsMatching) {
-  // Create a new URL object to avoid modifying originalUrl.
-  var url = new URL(originalUrl);
+                           dontCacheBustUrlsMatching) {
+    // Create a new URL object to avoid modifying originalUrl.
+    // 创建一个新的URL对象，避免影响原始URL
+    var url = new URL(originalUrl);
 
-  // If dontCacheBustUrlsMatching is not set, or if we don't have a match,
-  // then add in the extra cache-busting URL parameter.
-  if (!dontCacheBustUrlsMatching ||
-      !(url.pathname.match(dontCacheBustUrlsMatching))) {
-    url.search += (url.search ? '&' : '') +
-      encodeURIComponent(paramName) + '=' + encodeURIComponent(paramValue);
-  }
+    // If dontCacheBustUrlsMatching is not set, or if we don't have a match,
+    // then add in the extra cache-busting URL parameter.
+    // 如果 dontCacheBustUrlsMatching 值没有设置，或是没有匹配到，
+    if (!dontCacheBustUrlsMatching ||
+        !(url.pathname.match(dontCacheBustUrlsMatching))) {
+        url.search += (url.search ? '&' : '') +
+            encodeURIComponent(paramName) + '=' + encodeURIComponent(paramValue);
+    }
 
-  return url.toString();
+    return url.toString();
 };
 
 var isPathWhitelisted = function (whitelist, absoluteUrlString) {
-  // If the whitelist is empty, then consider all URLs to be whitelisted.
-  if (whitelist.length === 0) {
-    return true;
-  }
+    // If the whitelist is empty, then consider all URLs to be whitelisted.
+    if (whitelist.length === 0) {
+        return true;
+    }
 
-  // Otherwise compare each path regex to the path of the URL passed in.
-  var path = (new URL(absoluteUrlString)).pathname;
-  return whitelist.some(function(whitelistedPathRegex) {
-    return path.match(whitelistedPathRegex);
-  });
+    // Otherwise compare each path regex to the path of the URL passed in.
+    var path = (new URL(absoluteUrlString)).pathname;
+    return whitelist.some(function(whitelistedPathRegex) {
+        return path.match(whitelistedPathRegex);
+    });
 };
 
 var stripIgnoredUrlParameters = function (originalUrl,
   ignoreUrlParametersMatching) {
-  var url = new URL(originalUrl);
-  // Remove the hash; see https://github.com/GoogleChrome/sw-precache/issues/290
-  url.hash = '';
+      var url = new URL(originalUrl);
+      // Remove the hash; see https://github.com/GoogleChrome/sw-precache/issues/290
+      url.hash = '';
 
-  url.search = url.search.slice(1) // Exclude initial '?'
-    .split('&') // Split into an array of 'key=value' strings
-    .map(function(kv) {
-      return kv.split('='); // Split each 'key=value' string into a [key, value] array
-    })
-    .filter(function(kv) {
-      return ignoreUrlParametersMatching.every(function(ignoredRegex) {
-        return !ignoredRegex.test(kv[0]); // Return true iff the key doesn't match any of the regexes.
-      });
-    })
-    .map(function(kv) {
-      return kv.join('='); // Join each [key, value] array into a 'key=value' string
-    })
-    .join('&'); // Join the array of 'key=value' strings into a string with '&' in between each
+      url.search = url.search.slice(1) // Exclude initial '?'
+          .split('&') // Split into an array of 'key=value' strings
+          .map(function(kv) {
+              return kv.split('='); // Split each 'key=value' string into a [key, value] array
+          })
+          .filter(function(kv) {
+              return ignoreUrlParametersMatching.every(function(ignoredRegex) {
+                  return !ignoredRegex.test(kv[0]); // Return true iff the key doesn't match any of the regexes.
+              });
+          })
+          .map(function(kv) {
+              return kv.join('='); // Join each [key, value] array into a 'key=value' string
+          })
+          .join('&'); // Join the array of 'key=value' strings into a string with '&' in between each
 
-  return url.toString();
+    return url.toString();
 };
 
 
@@ -117,171 +111,174 @@ var addDirectoryIndex = function (originalUrl, index) {
 };
 
 var cleanResponse = function (originalResponse) {
-  // If this is not a redirected response, then we don't have to do anything.
-  if (!originalResponse.redirected) {
-    return Promise.resolve(originalResponse);
-  }
+    // If this is not a redirected response, then we don't have to do anything.
+    if (!originalResponse.redirected) {
+        return Promise.resolve(originalResponse);
+    }
 
-  // Firefox 50 and below doesn't support the Response.body stream, so we may
-  // need to read the entire body to memory as a Blob.
-  var bodyPromise = 'body' in originalResponse ?
-    Promise.resolve(originalResponse.body) :
-    originalResponse.blob();
+    // Firefox 50 and below doesn't support the Response.body stream, so we may
+    // need to read the entire body to memory as a Blob.
+    var bodyPromise = 'body' in originalResponse ?
+        Promise.resolve(originalResponse.body) :
+        originalResponse.blob();
 
-  return bodyPromise.then(function(body) {
-    // new Response() is happy when passed either a stream or a Blob.
-    return new Response(body, {
-      headers: originalResponse.headers,
-      status: originalResponse.status,
-      statusText: originalResponse.statusText
+    return bodyPromise.then(function(body) {
+        // new Response() is happy when passed either a stream or a Blob.
+        return new Response(body, {
+            headers: originalResponse.headers,
+            status: originalResponse.status,
+            statusText: originalResponse.statusText
+        });
     });
-  });
 };
 
 var hashParamName = '_sw-precache';
 var urlsToCacheKeys = new Map(
-  precacheConfig.map(function(item) {
-    var relativeUrl = item[0];
-    var hash = item[1];
-    var absoluteUrl = new URL(relativeUrl, self.location);
-    var cacheKey = createCacheKey(absoluteUrl, hashParamName, hash, false);
-    return [absoluteUrl.toString(), cacheKey];
-  })
+    precacheConfig.map(function(item) {
+        var relativeUrl = item[0];
+        var hash = item[1];
+        var absoluteUrl = new URL(relativeUrl, self.location);
+        var cacheKey = createCacheKey(absoluteUrl, hashParamName, hash, false);
+        return [absoluteUrl.toString(), cacheKey];
+    })
 );
 
 function setOfCachedUrls(cache) {
-  return cache.keys().then(function(requests) {
-    if (requests && requests.length > 0) {
-      firstRegister = 0;
-    }
-    return requests.map(function(request) {
-      return request.url;
+    return cache.keys().then(function(requests) {
+        if (requests && requests.length > 0) {
+            firstRegister = 0;
+        }
+        return requests.map(function(request) {
+            return request.url;
+        });
+    }).then(function(urls) {
+        return new Set(urls);
     });
-  }).then(function(urls) {
-    return new Set(urls);
-  });
 }
 
 self.addEventListener('install', function(event) {
-  event.waitUntil(
-    caches.open(cacheName).then(function(cache) {
-      return setOfCachedUrls(cache).then(function(cachedUrls) {
-        return Promise.all(
-          Array.from(urlsToCacheKeys.values()).map(function(cacheKey) {
-            // If we don't have a key matching url in the cache already, add it.
-            if (!cachedUrls.has(cacheKey)) {
-              var request = new Request(cacheKey, {credentials: 'same-origin'});
-              return fetch(request).then(function(response) {
-                // Bail out of installation unless we get back a 200 OK for
-                // every request.
-                if (!response.ok) {
-                  throw new Error('Request for ' + cacheKey + ' returned a ' +
-                    'response with status ' + response.status);
-                }
+    event.waitUntil(
+        caches.open(cacheName).then(function(cache) {
+            return setOfCachedUrls(cache).then(function(cachedUrls) {
+                return Promise.all(
+                    Array.from(urlsToCacheKeys.values()).map(function(cacheKey) {
+                        // If we don't have a key matching url in the cache already, add it.
+                        if (!cachedUrls.has(cacheKey)) {
+                            var request = new Request(cacheKey, {credentials: 'same-origin'});
+                            return fetch(request).then(function(response) {
+                                // Bail out of installation unless we get back a 200 OK for
+                                // every request.
+                                if (!response.ok) {
+                                    throw new Error('Request for ' + cacheKey + ' returned a ' +
+                                      'response with status ' + response.status);
+                                }
 
-                return cleanResponse(response).then(function(responseToCache) {
-                  return cache.put(cacheKey, responseToCache);
-                });
-              });
-            }
-          })
-        );
-      });
-    })
-    .then(function() {
-      
-      // Force the SW to transition from installing -> active state
-      return self.skipWaiting();
-      
-    })
-  );
+                                return cleanResponse(response).then(function(responseToCache) {
+                                    return cache.put(cacheKey, responseToCache);
+                                });
+                            });
+                        }
+                    })
+                );
+            });
+        })
+        .then(function() {
+            
+            // Force the SW to transition from installing -> active state
+            return self.skipWaiting();
+            
+        })
+    );
 });
 
 self.addEventListener('activate', function(event) {
-  var setOfExpectedUrls = new Set(urlsToCacheKeys.values());
+    var setOfExpectedUrls = new Set(urlsToCacheKeys.values());
 
-  event.waitUntil(
-    caches.open(cacheName).then(function(cache) {
-      return cache.keys().then(function(existingRequests) {
-        return Promise.all(
-          existingRequests.map(function(existingRequest) {
-            if (!setOfExpectedUrls.has(existingRequest.url)) {
-              return cache.delete(existingRequest);
+    event.waitUntil(
+        caches.open(cacheName).then(function(cache) {
+            return cache.keys().then(function(existingRequests) {
+                return Promise.all(
+                    existingRequests.map(function(existingRequest) {
+                        if (!setOfExpectedUrls.has(existingRequest.url)) {
+                            return cache.delete(existingRequest);
+                        }
+                    })
+                );
+            });
+        }).then(function() {
+            
+            return self.clients.claim();
+            
+        }).then(function() {
+            // if it's not the first time to install the service worker for this page, or the
+            // cahceStorage includes some caches of this page，the 'updateMessage' will be casted.
+            if (!firstRegister) {
+                return self.clients.matchAll()
+                    .then(function (clients) {
+                        if (clients && clients.length) {
+                            var currentClient = clients[0];
+                            currentClient.postMessage('updateMessage');
+                        }
+                    })
             }
-          })
-        );
-      });
-    }).then(function() {
-      
-      return self.clients.claim();
-      
-    }).then(function() {
-      if (!firstRegister) {
-        return self.clients.matchAll()
-          .then(function (clients) {
-            if (clients && clients.length) {
-              var currentClient = clients[0];
-              currentClient.postMessage('updateMessage');
-            }
-          })
-      }
-    })
-  );
+        })
+    );
 });
 
 
 
 self.addEventListener('fetch', function(event) {
-  if (event.request.method === 'GET') {
-    // Should we call event.respondWith() inside this fetch event handler?
-    // This needs to be determined synchronously, which will give other fetch
-    // handlers a chance to handle the request if need be.
-    var shouldRespond;
+    if (event.request.method === 'GET') {
+        // Should we call event.respondWith() inside this fetch event handler?
+        // This needs to be determined synchronously, which will give other fetch
+        // handlers a chance to handle the request if need be.
+        var shouldRespond;
 
-    // First, remove all the ignored parameters and hash fragment, and see if we
-    // have that URL in our cache. If so, great! shouldRespond will be true.
-    var url = stripIgnoredUrlParameters(event.request.url, ignoreUrlParametersMatching);
-    shouldRespond = urlsToCacheKeys.has(url);
+        // First, remove all the ignored parameters and hash fragment, and see if we
+        // have that URL in our cache. If so, great! shouldRespond will be true.
+        var url = stripIgnoredUrlParameters(event.request.url, ignoreUrlParametersMatching);
+        shouldRespond = urlsToCacheKeys.has(url);
 
-    // If shouldRespond is false, check again, this time with 'index.html'
-    // (or whatever the directoryIndex option is set to) at the end.
-    var directoryIndex = 'index.html';
-    if (!shouldRespond && directoryIndex) {
-      url = addDirectoryIndex(url, directoryIndex);
-      shouldRespond = urlsToCacheKeys.has(url);
+        // If shouldRespond is false, check again, this time with 'index.html'
+        // (or whatever the directoryIndex option is set to) at the end.
+        var directoryIndex = 'index.html';
+        if (!shouldRespond && directoryIndex) {
+            url = addDirectoryIndex(url, directoryIndex);
+            shouldRespond = urlsToCacheKeys.has(url);
+        }
+
+        // If shouldRespond is still false, check to see if this is a navigation
+        // request, and if so, whether the URL matches navigateFallbackWhitelist.
+        var navigateFallback = '/index.html';
+        if (!shouldRespond &&
+            navigateFallback &&
+            (event.request.mode === 'navigate') &&
+            isPathWhitelisted(["^(?!.*\\.html$|\\/data\\/).*"], event.request.url)
+        ) {
+            url = new URL(navigateFallback, self.location).toString();
+            shouldRespond = urlsToCacheKeys.has(url);
+        }
+
+        // If shouldRespond was set to true at any point, then call
+        // event.respondWith(), using the appropriate cache key.
+        if (shouldRespond) {
+            event.respondWith(
+                  caches.open(cacheName).then(function(cache) {
+                    return cache.match(urlsToCacheKeys.get(url)).then(function(response) {
+                        if (response) {
+                            return response;
+                        }
+                        throw Error('The cached response that was expected is missing.');
+                    });
+                }).catch(function(e) {
+                    // Fall back to just fetch()ing the request if some unexpected error
+                    // prevented the cached response from being valid.
+                    console.warn('Couldn\'t serve response for "%s" from cache: %O', event.request.url, e);
+                    return fetch(event.request);
+                })
+            );
+        }
     }
-
-    // If shouldRespond is still false, check to see if this is a navigation
-    // request, and if so, whether the URL matches navigateFallbackWhitelist.
-    var navigateFallback = '/index.html';
-    if (!shouldRespond &&
-        navigateFallback &&
-        (event.request.mode === 'navigate') &&
-        isPathWhitelisted(["^(?!.*\\.html$|\\/data\\/).*"], event.request.url)) {
-      url = new URL(navigateFallback, self.location).toString();
-      shouldRespond = urlsToCacheKeys.has(url);
-    }
-
-    // If shouldRespond was set to true at any point, then call
-    // event.respondWith(), using the appropriate cache key.
-    if (shouldRespond) {
-      event.respondWith(
-        caches.open(cacheName).then(function(cache) {
-          return cache.match(urlsToCacheKeys.get(url)).then(function(response) {
-            if (response) {
-              return response;
-            }
-            throw Error('The cached response that was expected is missing.');
-          });
-        }).catch(function(e) {
-          // Fall back to just fetch()ing the request if some unexpected error
-          // prevented the cached response from being valid.
-          console.warn('Couldn\'t serve response for "%s" from cache: %O', event.request.url, e);
-          return fetch(event.request);
-        })
-      );
-    }
-  }
 });
 
 
